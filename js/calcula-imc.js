@@ -11,7 +11,7 @@ for(var i = 0; i < pacientes.length; i++){
     var peso = tdPeso.textContent;
 
     var tdAltura = paciente.querySelector(".info-altura");
-    var tdAltura = tdPeso.textContent;
+    var altura = tdAltura.textContent;
 
     var tdImc = paciente.querySelector(".info-imc");
 
@@ -22,26 +22,26 @@ for(var i = 0; i < pacientes.length; i++){
         console.log("Peso inválido");
         pesoEhValido = false;
         tdImc.textContent = "Peso Inválido!";
+        paciente.classList.add("paciente-invalido");
     }
 
     if(altura <= 0 || altura >= 3.00){
         console.log("Altura inválido");
         alturaEhValido = false;
-        tdImc.textContent = "Altura Inválido!"
+        tdImc.textContent = "Altura Inválido!";
+        paciente.classList.add("paciente-invalido");
     }
 
     if(alturaEhValido && pesoEhValido){
-        var imc = peso / (altura * altura);
+        var imc = calculaImc(peso, altura);
         tdImc.textContent = imc;
     }
 }
 
-var botaoAdicionar = document.querySelector("#adicionar-paciente");
-botaoAdicionar.addEventListener("click", function(){
-    console.log("Oi, cliquei");
-});
+function calculaImc(peso, altura) {
+    var imc = 0;
 
+    imc = peso / (altura * altura);
 
-/*titulo.addEventListener("click", function(){
-    console.log("Clicando")
-});*/
+    return imc.toFixed(2);
+}
